@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="pytest-notifier",
-    version="0.0.1",
+    version="0.1",
     url="https://github.com/ratson/pytest-notifier",
 
     author="Ratson",
@@ -12,14 +12,14 @@ setuptools.setup(
     long_description=open('README.rst').read(),
     keywords=[
         'pytest', 'pytest-', 'osx', 'notifications', 'notifier',
-        'notificationcenter', 'py.test'],
+        'notificationcenter', 'py.test', 'terminal-notifier'],
 
     packages=setuptools.find_packages(),
 
     install_requires=['pytest'],
 
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
