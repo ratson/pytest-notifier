@@ -11,6 +11,9 @@ A `pytest`_ plugin to notify test result on OS X.
 Requirements
 ------------
 
+Must meet ONE of the following requirements: 
+
+* `terminal-notifier`_
 * OS X Mountain Lion or later
 
 
@@ -38,3 +41,4 @@ If you encounter any problems, please `file an issue`_ along with a detailed des
 .. _`pip`: https://pypi.python.org/pypi/pip/
 .. _`PyPI`: https://pypi.python.org/pypi
 .. _`pytest`: https://github.com/pytest-dev/pytest
+.. _`terminal-notifier`: https://github.com/julienXX/terminal-notifier
