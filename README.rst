@@ -5,16 +5,25 @@ pytest-notifier
     :target: https://pypi.python.org/pypi/pytest-notifier
     :alt: Latest PyPI version
 
-A `pytest`_ plugin to notify test result on OS X.
+A `pytest`_ plugin to notify test result on Linux and OS X.
 
 
 Requirements
 ------------
 
-Must meet ONE of the following requirements: 
+Linux
+^^^^^
 
-* `terminal-notifier`_
-* OS X Mountain Lion or later
+Make sure ``notify-send`` is exists in ``$PATH``,
+which comes from ``libnotify``.
+
+OS X
+^^^^
+
+OS X 10.8 and higher is required.
+
+Optionally, you could install `terminal-notifier`_
+to avoid Script Editor being opened when notification icon is clicked.
 
 
 Installation
