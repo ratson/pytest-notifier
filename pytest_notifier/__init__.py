@@ -36,7 +36,10 @@ def pytest_terminal_summary(terminalreporter):
     tr = terminalreporter
     duration = time() - tr._sessionstarttime
     keys = ('passed', 'failed', 'error', 'deselected')
-    counts = {k: len(list(filter(lambda r: r.when == 'call', tr.stats.get(k, [])))) for k in keys}
+    counts = {
+        k: len(list(filter(lambda r: getattr(r, 'when', '') == 'call', tr.stats.get(k, []))))
+        for k in keys
+    }
 
     if sum(counts.values()) == 0:
         msg = 'No tests ran'
