@@ -15,6 +15,24 @@ def pytest_addoption(parser):
         default=True,
         help='Enable test result notifications.',
     )
+    group.addoption(
+        '--notifier-onzero-title',
+        dest='notifier_onzero_title',
+        default='py.test',
+        help='Notifier title when no tests were run.',
+    )
+    group.addoption(
+        '--notifier-onpass-title',
+        dest='notifier_onpass_title',
+        default='py.test',
+        help='Notifier title when tests pass.',
+    )
+    group.addoption(
+        '--notifier-onfail-title',
+        dest='notifier_onfail_title',
+        default='py.test',
+        help='Notifier title when tests fail.',
+    )
 
 
 def get_msg_part(count, group):
@@ -38,12 +56,15 @@ def pytest_terminal_summary(terminalreporter):
     keys = ('passed', 'failed', 'error', 'deselected')
     counts = {k: len(tr.stats.get(k, [])) for k in keys}
     if sum(counts.values()) == 0:
+        title = terminalreporter.config.option.notifier_onzero_title
         msg = 'No tests ran'
     elif counts['passed'] and not (counts['failed'] or counts['error']):
+        title = terminalreporter.config.option.notifier_onpass_title
         msg = 'Success - {passed} Passed'.format(**counts)
     else:
+        title = terminalreporter.config.option.notifier_onfail_title
         msg = ' '.join(filter(None, (
             get_msg_part(count=counts[k], group=k) for k in keys)))
 
     msg += ' in {:.2f}s'.format(duration)
-    notify('py.test', msg)
+    notify(title, msg)
