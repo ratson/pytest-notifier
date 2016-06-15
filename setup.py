@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="pytest-notifier",
-    version="0.2",
+    version="0.3",
     url="https://github.com/ratson/pytest-notifier",
 
     author="Ratson",
