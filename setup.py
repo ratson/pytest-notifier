@@ -1,5 +1,9 @@
 import setuptools
 
+tests_require = [
+    'pytest',
+]
+
 setuptools.setup(
     name="pytest-notifier",
     version="0.3",
@@ -17,6 +21,8 @@ setuptools.setup(
     packages=setuptools.find_packages(),
 
     install_requires=['pytest'],
+    setup_requires=['pytest-runner'],
+    tests_require=tests_require,
 
     classifiers=[
         'Development Status :: 3 - Alpha',
