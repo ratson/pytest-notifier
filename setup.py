@@ -2,6 +2,7 @@ import setuptools
 
 tests_require = [
     'pytest',
+    'pytest-mock',
 ]
 
 setuptools.setup(
