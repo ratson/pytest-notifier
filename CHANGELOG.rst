@@ -2,6 +2,11 @@
 Change Log
 ==========
 
+0.3.1 (2017-01-21)
+==================
+
+- Avoid subprocess.CalledProcessError when interrupted
+
 0.3 (2016-06-15)
 ================
 

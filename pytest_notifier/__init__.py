@@ -1,6 +1,8 @@
 """pytest-notifier - A pytest plugin to notify test result"""
 from time import time
 
+from _pytest.main import EXIT_INTERRUPTED
+
 from .notifier import notify
 
 
@@ -47,8 +49,11 @@ def get_msg_part(count, group):
     return '{} {}'.format(count, suffix)
 
 
-def pytest_terminal_summary(terminalreporter):
+def pytest_terminal_summary(terminalreporter, exitstatus):
     if not terminalreporter.config.option.notifier:
+        return
+
+    if exitstatus == EXIT_INTERRUPTED:
         return
 
     tr = terminalreporter
