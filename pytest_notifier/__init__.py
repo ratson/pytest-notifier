@@ -4,6 +4,7 @@ from time import time
 from _pytest.main import EXIT_INTERRUPTED
 
 from .notifier import notify
+from .utils import terminal_reporter_info
 
 
 def pytest_addoption(parser):
@@ -16,24 +17,6 @@ def pytest_addoption(parser):
         dest='notifier',
         default=True,
         help='Enable test result notifications.',
-    )
-    group.addoption(
-        '--notifier-onzero-title',
-        dest='notifier_onzero_title',
-        default='py.test',
-        help='Notifier title when no tests were run.',
-    )
-    group.addoption(
-        '--notifier-onpass-title',
-        dest='notifier_onpass_title',
-        default='py.test',
-        help='Notifier title when tests pass.',
-    )
-    group.addoption(
-        '--notifier-onfail-title',
-        dest='notifier_onfail_title',
-        default='py.test',
-        help='Notifier title when tests fail.',
     )
 
 
@@ -56,24 +39,19 @@ def pytest_terminal_summary(terminalreporter, exitstatus):
     if exitstatus == EXIT_INTERRUPTED:
         return
 
-    tr = terminalreporter
-    duration = time() - tr._sessionstarttime
-    keys = ('passed', 'failed', 'error', 'deselected')
-    counts = {
-        k: len(list(filter(lambda r: getattr(r, 'when', '') == 'call', tr.stats.get(k, []))))
-        for k in keys
-    }
+    info = terminal_reporter_info(terminalreporter)
 
-    if sum(counts.values()) == 0:
-        title = terminalreporter.config.option.notifier_onzero_title
-        msg = 'No tests ran'
-    elif counts['passed'] and not (counts['failed'] or counts['error']):
-        title = terminalreporter.config.option.notifier_onpass_title
-        msg = 'Success - {passed} Passed'.format(**counts)
+    if info.total == 0:
+        return
+    elif info.passed == info.total:
+        title = '100% Passed'
+        msg = '{} Passed'.format(info.passed)
+    elif info.failed > 0:
+        title = '{}% Faild'.format(int(info.failed * 100 / info.total))
+        msg = '{0.failed} of {0.total} tests failed'.format(info)
     else:
-        title = terminalreporter.config.option.notifier_onfail_title
-        msg = ' '.join(filter(None, (
-            get_msg_part(count=counts[k], group=k) for k in keys)))
+        title = 'Unexpected Result'
+        msg = 'Please report an issue how to trigger this'
 
-    msg += ' in {:.2f}s'.format(duration)
+    msg += ' in {:.2f}s'.format(info.duration)
     notify(title, msg)
