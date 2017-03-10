@@ -13,27 +13,15 @@ def pytest_addoption(parser):
     """
     group = parser.getgroup('terminal reporting')
     group.addoption(
-        '--notifier',
-        dest='notifier',
-        default=True,
-        help='Enable test result notifications.',
+        '--notifier-off',
+        action='store_true',
+        dest='notifier_off',
+        help='Turn off test result notifications.',
     )
 
 
-def get_msg_part(count, group):
-    if not count:
-        return None
-    if group in ('passed', 'failed'):
-        suffix = group.title()
-    elif group == 'deselected':
-        suffix = 'Skipped'
-    elif group == 'error':
-        suffix = 'Error(s)'
-    return '{} {}'.format(count, suffix)
-
-
 def pytest_terminal_summary(terminalreporter, exitstatus):
-    if not terminalreporter.config.option.notifier:
+    if terminalreporter.config.option.notifier_off:
         return
 
     if exitstatus == EXIT_INTERRUPTED:
