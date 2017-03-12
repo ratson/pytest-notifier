@@ -1,4 +1,5 @@
 """pytest-notifier - A pytest plugin to notify test result"""
+import os
 from time import time
 
 from _pytest.main import EXIT_INTERRUPTED
@@ -42,4 +43,5 @@ def pytest_terminal_summary(terminalreporter, exitstatus):
         msg = 'Please report an issue how to trigger this'
 
     msg += ' in {:.2f}s'.format(info.duration)
-    notify(title, msg)
+    icon = os.path.join(os.path.dirname(__file__), 'pytest_logo.png')
+    notify(title=title, body=msg, icon=icon)

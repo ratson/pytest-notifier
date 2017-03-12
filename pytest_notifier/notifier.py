@@ -2,19 +2,19 @@ import sys
 import subprocess
 
 
-def notify_via_libnotify(title, body):
-    subprocess.check_call([
-        'notify-send', title, body,
-    ])
+def notify_via_libnotify(title, body, icon=None):
+    args = ['notify-send', title, body]
+    subprocess.check_call(args)
 
 
-def notify_via_terminal_notifier(title, body):
-    subprocess.check_call([
-        'terminal-notifier', '-title', title, '-subtitle', body,
-    ])
+def notify_via_terminal_notifier(title, body, icon=None):
+    args = ['terminal-notifier', '-title', title, '-subtitle', body]
+    if icon:
+        args.extend(['-appIcon', icon])
+    subprocess.check_call(args)
 
 
-def notify_via_apple_script(title, body):
+def notify_via_apple_script(title, body, **kwargs):
     command = [
         'osascript', '-e',
         'display notification "{body}" with title "{title}"'
@@ -24,7 +24,7 @@ def notify_via_apple_script(title, body):
     p.wait()
 
 
-def notify(title, body):
+def notify(**kwargs):
     notify_functions = {
         'darwin': (notify_via_terminal_notifier,
                    notify_via_apple_script,
@@ -35,7 +35,7 @@ def notify(title, body):
                          notify_via_apple_script,))
     for f in notify_functions:
         try:
-            f(title, body)
+            f(**kwargs)
         except OSError:
             pass
         else:
