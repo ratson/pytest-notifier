@@ -29,15 +29,31 @@ to avoid Script Editor being opened when notification icon is clicked.
 Installation
 ------------
 
-You can install "pytest-notifier" via `pip`_ from `PyPI`_::
+You can install ``pytest-notifier`` via `pip`_ from `PyPI`_::
 
     $ pip install pytest-notifier
+
+
+
+Usage
+-----
+
+Once installed, notification will be shown after each test run.
+
+By using with `pytest-watch <https://github.com/joeyespo/pytest-watch>`_,
+you can get continous feedback during development::
+
+    $ ptw
+
+You can use ``--notifier-off`` flag to disable notification::
+
+    $ pytest --notifier-off
 
 
 Licence
 -------
 
-Distributed under the terms of the `MIT`_ license, "pytest-notifier" is free and open source software
+Distributed under the terms of the `MIT`_ license, ``pytest-notifier`` is free and open source software
 
 
 Issues
