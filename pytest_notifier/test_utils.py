@@ -18,12 +18,7 @@ def test_terminal_reporter_info_duration(mocker, mock_time):
     m = mocker.MagicMock(
         _sessionstarttime=mock_time.return_value,
     )
-    assert terminal_reporter_info(m) == Info(
-        duration=0,
-        total=0,
-        passed=0,
-        failed=0,
-    )
+    assert terminal_reporter_info(m).duration == 0
 
 
 def test_terminal_reporter_info_test_counts(mocker, mock_time):
@@ -37,11 +32,12 @@ def test_terminal_reporter_info_test_counts(mocker, mock_time):
             'failed': [
                 mocker.MagicMock(when='call'),
             ],
+            'error': [
+                mocker.MagicMock(when='setup', outcome='failed'),
+            ],
         },
     )
-    assert terminal_reporter_info(m) == Info(
-        duration=0,
-        total=3,
-        passed=2,
-        failed=1,
-    )
+    info = terminal_reporter_info(m)
+    assert info.total == 4
+    assert info.passed == 2
+    assert info.failed == 2

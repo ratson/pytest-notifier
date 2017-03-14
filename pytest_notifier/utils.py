@@ -7,15 +7,12 @@ Info = namedtuple('Info', ['duration', 'total', 'passed', 'failed'])
 
 def terminal_reporter_info(tr):
     duration = time.time() - tr._sessionstarttime
-    keys = ('passed', 'failed', 'error', 'deselected')
-    counts = {
-        k: len(list(filter(lambda r: getattr(r, 'when', '') == 'call',
-                           tr.stats.get(k, []))))
-        for k in keys
-    }
+    passed = len(tr.stats.get('passed', []))
+    failed = sum([len(tr.stats.get('failed', [])),
+                  len(tr.stats.get('error', []))])
     return Info(
         duration=duration,
-        total=sum(counts.values()),
-        passed=counts.get('passed', 0),
-        failed=counts.get('failed', 0),
+        total=passed + failed,
+        passed=passed,
+        failed=failed,
     )
