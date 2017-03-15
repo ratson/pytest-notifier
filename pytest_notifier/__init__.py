@@ -34,7 +34,7 @@ def pytest_terminal_summary(terminalreporter, exitstatus):
         return
     elif info.passed == info.total:
         title = '100% Passed'
-        msg = '\u2705 {} Passed'.format(info.passed)
+        msg = '\u2705 {} tests passed'.format(info.passed)
     elif info.failed > 0:
         title = '{}% Faild'.format(int(info.failed * 100 / info.total))
         msg = '\u26D4\uFE0F {0.failed} of {0.total} tests failed'.format(info)
@@ -42,6 +42,5 @@ def pytest_terminal_summary(terminalreporter, exitstatus):
         title = 'Unexpected Result'
         msg = 'Please report an issue how to trigger this'
 
-    msg += ' in {:.2f}s'.format(info.duration)
     icon = os.path.join(os.path.dirname(__file__), 'pytest_logo.png')
     notify(title=title, body=msg, icon=icon)
