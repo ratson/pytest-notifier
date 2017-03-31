@@ -2,10 +2,25 @@
 Change Log
 ==========
 
+1.0.0 (2017-03-31)
+==================
+
+**New Features**
+
+- Add ``--notifier-off`` option
+
+**Behavioural Changes**
+
+- Remove all old options
+- Count setup errors as failed
+- Update notificaiton message with emoji and pytest icon
+
+
 0.3.1 (2017-01-21)
 ==================
 
 - Avoid subprocess.CalledProcessError when interrupted
+
 
 0.3 (2016-06-15)
 ================

@@ -1,4 +1,5 @@
 """pytest-notifier - A pytest plugin to notify test result"""
+from __future__ import unicode_literals
 import os
 from time import time
 
