@@ -8,7 +8,7 @@ def notify_via_libnotify(title, body, icon=None):
 
 
 def notify_via_terminal_notifier(title, body, icon=None):
-    args = ['terminal-notifier', '-title', title, '-subtitle', body]
+    args = ['terminal-notifier', '-title', title, '-message', body]
     if icon:
         args.extend(['-appIcon', icon])
     subprocess.check_call(args)
