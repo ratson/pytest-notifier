@@ -2,6 +2,12 @@
 Change Log
 ==========
 
+1.0.1 (2017-07-01)
+==================
+
+- Fix ``terminal-notifier`` crash (`#6 <https://github.com/ratson/pytest-notifier/pull/6>`_)
+
+
 1.0.0 (2017-03-31)
 ==================
 
