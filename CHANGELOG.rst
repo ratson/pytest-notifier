@@ -2,6 +2,12 @@
 Change Log
 ==========
 
+1.0.2 (2017-12-24)
+==================
+
+- Fix failed message typo (`#8 <https://github.com/ratson/pytest-notifier/pull/8>`_)
+
+
 1.0.1 (2017-07-01)
 ==================
 
