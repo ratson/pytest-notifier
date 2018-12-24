@@ -37,7 +37,7 @@ def pytest_terminal_summary(terminalreporter, exitstatus):
         title = '100% Passed'
         msg = '\u2705 {} tests passed'.format(info.passed)
     elif info.failed > 0:
-        title = '{}% Faild'.format(int(info.failed * 100 / info.total))
+        title = '{}% Failed'.format(int(info.failed * 100 / info.total))
         msg = '\u26D4\uFE0F {0.failed} of {0.total} tests failed'.format(info)
     else:
         title = 'Unexpected Result'
