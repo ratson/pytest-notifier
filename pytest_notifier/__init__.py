@@ -1,9 +1,14 @@
 """pytest-notifier - A pytest plugin to notify test result"""
 from __future__ import unicode_literals
 import os
-from time import time
 
-from _pytest.main import EXIT_INTERRUPTED
+try:
+    # pytest < 5
+    from _pytest.main import EXIT_INTERRUPTED
+except ImportError:
+    # pytest >= 5
+    from _pytest.main import ExitCode
+    EXIT_INTERRUPTED = ExitCode.INTERRUPTED
 
 from .notifier import notify
 from .utils import terminal_reporter_info
