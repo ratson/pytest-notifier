@@ -7,7 +7,7 @@ tests_require = [
 
 setuptools.setup(
     name="pytest-notifier",
-    version="1.0.2",
+    version="1.0.3",
     url="https://github.com/ratson/pytest-notifier",
 
     author="Ratson",
