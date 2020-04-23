@@ -28,6 +28,12 @@ def pytest_addoption(parser):
 
 
 def pytest_terminal_summary(terminalreporter, exitstatus):
+
+    # If run together with pytest-xdist
+    # We don't want to send notifications from workers
+    if os.getenv('PYTEST_XDIST_WORKER'):
+        return
+
     if terminalreporter.config.option.notifier_off:
         return
 
