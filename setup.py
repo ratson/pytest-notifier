@@ -7,7 +7,7 @@ tests_require = [
 
 setuptools.setup(
     name="pytest-notifier",
-    version="1.0.3",
+    version="1.0.4",
     url="https://github.com/ratson/pytest-notifier",
 
     author="Ratson",
@@ -36,6 +36,7 @@ setuptools.setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ],
 
     entry_points={
